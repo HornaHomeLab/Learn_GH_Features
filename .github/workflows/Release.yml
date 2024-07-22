@@ -82,7 +82,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Generate Archive name
         id: archive_name
-        run: echo "arch_name=runner-${{ needs.Create_Version_Tag.outputs.tag_name }}.tar.gz" >> $GITHUB_OUTPUT
+        run: echo "arch_name=NewRelease-${{ needs.Create_Version_Tag.outputs.tag_name }}.tar.gz" >> $GITHUB_OUTPUT
       - name: Prepare assets archive ${{ steps.archive_name.outputs.arch_name }}
         run: |
           tar -czf "${{ steps.archive_name.outputs.arch_name }}" \
