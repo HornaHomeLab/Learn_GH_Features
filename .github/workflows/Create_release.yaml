@@ -27,7 +27,7 @@ jobs:
 
             echo "$release_tag_name"
 
-            if [ "${{ inputs.version_tag }}" == "$release_tag_name" ]; then
+            if [ "${{ inputs.version_tag }}" == $release_tag_name ]; then
               echo "Release exists"
               echo "exist=true" >> $GITHUB_OUTPUT
             else
