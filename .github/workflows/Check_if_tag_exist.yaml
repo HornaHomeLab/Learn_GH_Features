@@ -20,9 +20,15 @@ jobs:
       - name: Get new Tag
         id: file-tag
         run: |
-          echo "tag_name=$(
-            grep '##### version:' './README.md' | awk -F: '{print $2}' | tr -d '[:blank:]'
-          )" >> $GITHUB_OUTPUT
+          tag=$(grep '##### version:' './README.md' | awk -F: '{print $2}' | tr -d '[:blank:]')
+
+          if [ -z "$tag" ]; then
+            echo "Can not find verion in ./README.md"
+            exit 1
+          fi
+          
+          echo "tag_name=$tag" >> $GITHUB_OUTPUT
+
       - name: Check if tag exist
         id: tag-reference
         run: |
