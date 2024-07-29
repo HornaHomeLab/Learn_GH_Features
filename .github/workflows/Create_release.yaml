@@ -53,7 +53,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            --url https://api.github.com/repos/${{ github.repository }}/releases${{ steps.release-check.outputs.release_id }} \
+            --url https://api.github.com/repos/${{ github.repository }}/releases/${{ steps.release-check.outputs.release_id }} \
             -d '{
               "tag_name":"${{ inputs.version_tag }}",
               "name":"${{ inputs.version_tag }} Release",
