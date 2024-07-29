@@ -34,7 +34,7 @@ jobs:
               https://api.github.com/repos/OWNER/REPO/git/ref/tags/${{ inputs.required }} \
                 | jq .url )
 
-            if [[ "$tag_url" != "null"]]; then
+            if [[ "$tag_url" != "null" ]] then
               echo "tag_reference_exist=true" >> $GITHUB_OUTPUT
             else
               echo "tag_reference_exist=false" >> $GITHUB_OUTPUT
