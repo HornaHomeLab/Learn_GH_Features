@@ -75,7 +75,7 @@ jobs:
         id: release-id
         run: |
           if [ ${{ steps.release-check.outputs.release_id }} == 'null' ]; then
-            echo "release_id=${{ steps.new-release.outputs.release_id }}"
+            echo "release_id=${{ steps.new-release.outputs.release_id }}" >> $GITHUB_OUTPUT
           else
-            echo "release_id=${{ steps.release-check.outputs.release_id }}"
+            echo "release_id=${{ steps.release-check.outputs.release_id }}" >> $GITHUB_OUTPUT
           fi
