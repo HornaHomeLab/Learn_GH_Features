@@ -48,6 +48,7 @@ jobs:
       - name: Update Release ${{ inputs.version_tag }}
         if: steps.release-check.outputs.release_id != 'null'
         run: |
+          echo "${{ steps.release-check.outputs.release_id}}"
           curl -L -s --fail-with-body \
             -X PATCH \
             -H "Accept: application/vnd.github+json" \
