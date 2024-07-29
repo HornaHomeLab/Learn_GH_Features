@@ -1,4 +1,9 @@
-gh api \
-  -H "Accept: application/vnd.github+json" \
-  -H "X-GitHub-Api-Version: 2022-11-28" \
-  /repos/HornaHomeLab/Learn_GH_Features/releases/tags/1.1.1
+paths=$(echo $json_string | jq -r '.[]')
+
+json_string='["./.github/workflows/Check_version.yaml", "./.github/workflows/Update_asset.yaml", "./README.md"]'
+
+paths=$(echo $json_string | jq -r '.[]')
+archive_name="archive.tar.gz"
+tar -czf $archive_name $paths
+
+tar -czf $archive_name $(echo "$paths" | tr '\n' '\n \')

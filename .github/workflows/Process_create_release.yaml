@@ -24,8 +24,10 @@ jobs:
       pre_release: 'false'
 
   Upload_Assets:
-    needs: Create_Release
-    runs-on: container
-    steps:
-      - name: print release id
-        run: echo "${{ needs.Create_Release.outputs.release_id }}"
+    needs: [Get_Version, Create_Release]
+    uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Update_asset.yaml@main
+    with:
+      archive_name: "tempor"
+      release_id: ${{ needs.Create_Release.outputs.release_id }}
+      version_tag: ${{ needs.Get_Version.outputs.version_tag }}
+      files_to_archive: "['./.github/workflows/Check_version.yaml', './.github/workflows/Update_asset.yaml', './README.md']"

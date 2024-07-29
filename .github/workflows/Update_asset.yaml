@@ -1,0 +1,59 @@
+on:
+  workflow_call:
+    inputs:
+      archive_name:
+        type: string
+        required: true
+      release_id:
+        type: string
+        required: true
+      version_tag:
+        type: string
+        required: true
+      files_to_archive:
+        type: string
+        required: true
+        description: JSON list of file paths which should be included in archive
+
+jobs:
+  Upload_assets:
+    runs-on: container
+    steps:
+      - name: Check if asset exist
+        id: asset
+        run: |
+          echo "asset_id=$(
+            curl -L -s --fail-with-body \
+              -X GET \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer${{ secrets.GITHUB_TOKEN }}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              --url https://api.github.com/repos/${{ github.repository }}/releases/${{ inputs.release_id }}/assets \
+            | jq .id)" >> $GITHUB_OUTPUT
+      
+      - name: Delete existing asset
+        if: steps.asset.outputs.asset_id != 'null'
+        run: |
+          curl -L -s --fail-with-body \
+            -X DELETE \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer <YOUR-TOKEN>" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            --url https://api.github.com/${{ github.repository }}/releases/assets/${{ steps.asset.outputs.asset_id }}
+      
+      - name: Create archive directory
+        run: |
+          archive_name="archive.tar.gz"
+          files_to_arch=$(echo "${{inputs.files_to_archive}}" | jq -r '.[]')
+          tar -czf $archive_name $(echo "$paths" | tr '\n' '\n \')
+      - name: Check if archive exist
+        run: |
+          ls
+      - name: Unpack archive
+        run: |
+          mkdir temp 
+          cp ./archive.tar.gz ./temp/
+          cd ./temp
+          tar -xzf ./archive.tar.gz 
+          ls
+
