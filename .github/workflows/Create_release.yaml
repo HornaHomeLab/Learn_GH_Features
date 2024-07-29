@@ -4,7 +4,6 @@ on:
       environment_type:
         type: string
         required: true
-      
 
 jobs:
   Get_Version_Tag:
@@ -14,8 +13,8 @@ jobs:
     runs-on: container
     needs: Get_Version_Tag
     steps:
-
       - name: Create Tag ${{ needs.Get_Version_Tag.outputs.version_tag }} object
+        if: ${{ needs.Get_Version_Tag.outputs.tag_reference_exist == 'false' }}
         run: |
           curl -L -s --fail-with-body \
             -X POST \
@@ -29,8 +28,9 @@ jobs:
               "object":"${{ github.sha }}", 
               "type":"commit"
             }'
-            
+
       - name: Create Tag ${{ needs.Get_Version_Tag.outputs.version_tag }} reference
+        if: ${{ needs.Get_Version_Tag.outputs.tag_reference_exist == 'false' }}
         run: |
           curl -L -s --fail-with-body \
             -X POST \
@@ -41,4 +41,19 @@ jobs:
             -d '{
               "ref":"refs/tags/${{ needs.Get_Version_Tag.outputs.version_tag }}",
               "sha":"${{ github.sha }}"
+            }'
+
+      - name: Update Tag ${{ needs.Get_Version_Tag.outputs.version_tag }} reference
+        if: ${{ needs.Get_Version_Tag.outputs.tag_reference_exist == 'true' }}
+        run: |
+          curl -L -s --fail-with-body \
+            -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            --url https://api.github.com/repos/${{ github.repository }}/git/ref/tags/${{ needs.Get_Version_Tag.outputs.version_tag }} \
+            -d '{
+              "ref":"refs/tags/${{ needs.Get_Version_Tag.outputs.version_tag }}",
+              "sha":"${{ github.sha }}",
+              "force":true
             }'
