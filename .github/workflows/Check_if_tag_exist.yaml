@@ -26,13 +26,12 @@ jobs:
             echo "Can not find verion in ./README.md"
             exit 1
           fi
-          
+
           echo "tag_name=$tag" >> $GITHUB_OUTPUT
 
       - name: Check if tag exist
         id: tag-reference
         run: |
-          echo "${{ steps.file-tag.outputs.tag_name }}"
           tag_url=$(
             curl -L -s --fail-with-body \
               -H "Accept: application/vnd.github+json" \
@@ -42,8 +41,10 @@ jobs:
                 | jq .url )
 
             if [ "$tag_url" != "null" ]; then
+              echo "Tag exists"
               echo "tag_reference_exist=true" >> $GITHUB_OUTPUT
             else
+              echo "Tag does not exist"
               echo "tag_reference_exist=false" >> $GITHUB_OUTPUT
             fi
 
