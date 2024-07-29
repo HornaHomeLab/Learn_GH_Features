@@ -14,7 +14,7 @@ jobs:
     needs: Get_Version_Tag
     steps:
       - name: Create Tag ${{ needs.Get_Version_Tag.outputs.version_tag }} object
-        if: ${{ needs.Get_Version_Tag.outputs.tag_reference_exist == 'false' }}
+        if: ${{ needs.Get_Version_Tag.outputs.tag_reference_exist == false }}
         run: |
           curl -L -s --fail-with-body \
             -X POST \
@@ -30,7 +30,7 @@ jobs:
             }'
 
       - name: Create Tag ${{ needs.Get_Version_Tag.outputs.version_tag }} reference
-        if: ${{ needs.Get_Version_Tag.outputs.tag_reference_exist == 'false' }}
+        if: ${{ needs.Get_Version_Tag.outputs.tag_reference_exist == false }}
         run: |
           curl -L -s --fail-with-body \
             -X POST \
