@@ -13,7 +13,7 @@ jobs:
     runs-on: container
     steps:
       - name: Create Tag ${{ inputs.version_tag }} object
-        if: ${{ inputs.tag_reference_exist == 'false' }}
+        if: ${{ inputs.tag_reference_exist == false }}
         run: |
           curl -L -s --fail-with-body \
             -X POST \
@@ -29,7 +29,7 @@ jobs:
             }'
 
       - name: Create Tag ${{ inputs.version_tag }} reference
-        if: ${{ inputs.tag_reference_exist == 'false' }}
+        if: ${{ inputs.tag_reference_exist == false }}
         run: |
           curl -L -s --fail-with-body \
             -X POST \
@@ -43,7 +43,7 @@ jobs:
             }'
 
       - name: Update Tag ${{ inputs.version_tag }} reference
-        if: ${{ inputs.tag_reference_exist == 'true' }}
+        if: ${{ inputs.tag_reference_exist == true }}
         run: |
           curl -L -s --fail-with-body \
             -X PATCH \
