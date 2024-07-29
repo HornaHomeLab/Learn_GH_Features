@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Get new Tag
+      - name: Get Tag from file
         id: file-tag
         run: |
           tag=$(grep '##### version:' './README.md' | awk -F: '{print $2}' | tr -d '[:blank:]')

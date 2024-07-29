@@ -7,7 +7,7 @@ on:
 
 jobs:
   Get_Version:
-    uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Check_if_tag_exist.yaml@main
+    uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Check_tag.yaml@main
 
   Create_Tag:
     needs: Get_Version
