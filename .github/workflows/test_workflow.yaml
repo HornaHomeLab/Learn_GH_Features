@@ -26,3 +26,10 @@ jobs:
         shell: pwsh
         run: |
           write-host "${{steps.a.outputs.my_var}}"
+      - name: std var
+        run: |
+          New-Variable -Name 'STD_VAR' -value @{"a"=1} -scope Global
+      - name: read std var
+        run: |
+          Write-host $STD_VAR
+          Write-host $Global:STD_VAR
