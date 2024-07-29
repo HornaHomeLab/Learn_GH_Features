@@ -1,0 +1,18 @@
+on:
+  workflow_dispatch:
+    inputs:
+      environment_type:
+        description: Select the environment
+        type: choice
+        default: "DEV"
+        required: true
+        options:
+          - DEV
+          - PROD
+
+jobs:
+  Trigger_Workflow:
+      uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Create_release.yaml@main
+      with:
+        environment_type: ${{ inputs.environment_type }}
+    

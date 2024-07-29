@@ -1,0 +1,42 @@
+on:
+  workflow_call:
+    outputs:
+      version_tag:
+        description: "Version tag retrieved from README.md"
+        value: ${{ jobs.Check_if_tag_exists.outputs.version_tag }}
+      tag_reference_exist:
+        description: "Bool if tag already exist or not"
+        value: ${{ jobs.Check_if_tag_exists.outputs.tag_reference_exist }}
+
+jobs:
+  Check_if_tag_exists:
+    runs-on: container
+    outputs:
+      version_tag: ${{ steps.file-tag.outputs.tag_name }}
+      tag_reference_exist: ${{ steps.tag-reference.outputs.tag_reference_exist }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Get new Tag
+        id: file-tag
+        run: |
+          echo "tag_name=$(
+            grep '##### version:' "./README.md" | awk -F: '{print $2}' | tr -d '[:blank:]'
+          )" >> $GITHUB_OUTPUT
+      - name: Check if tag exist
+        id: tag-reference
+        run: |
+          tag_url=$(
+            curl -L -s --fail-with-body \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/OWNER/REPO/git/ref/tags/${{ inputs.required }} \
+                | jq .url )
+
+            if [[ "$tag_url" != "null"]]; then
+              echo "tag_reference_exist=true" >> $GITHUB_OUTPUT
+            else
+              echo "tag_reference_exist=false" >> $GITHUB_OUTPUT
+            fi
+
