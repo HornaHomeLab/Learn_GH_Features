@@ -20,10 +20,13 @@ jobs:
       - name: Get new Tag
         id: file-tag
         run: |
-          echo "tag_name=$(grep '##### version:' './README.md' | awk -F: '{print $2}' | tr -d '[:blank:]')" >> $GITHUB_OUTPUT
+          echo "tag_name=$(
+            grep '##### version:' './README.md' | awk -F: '{print $2}' | tr -d '[:blank:]'
+          )" >> $GITHUB_OUTPUT
       - name: Check if tag exist
         id: tag-reference
         run: |
+          echo "${{ steps.file-tag.outputs.tag_name }}"
           tag_url=$(
             curl -L -s --fail-with-body \
               -H "Accept: application/vnd.github+json" \
