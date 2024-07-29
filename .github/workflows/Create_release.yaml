@@ -25,9 +25,13 @@ jobs:
             https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ inputs.version_tag }} \
             | jq .tag_name)
 
+            echo "$release_tag_name"
+
             if [ "${{ inputs.version_tag }}" == "$release_tag_name" ]; then
+              echo "Release exists"
               echo "exist=true" >> $GITHUB_OUTPUT
             else
+              echo "Release does not exist"
               echo "exist=false" >> $GITHUB_OUTPUT
             fi
 
