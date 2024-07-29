@@ -31,7 +31,7 @@ jobs:
         run: |
           New-Variable -Name 'STD_VAR' -value @{"a"=1} -scope Global
       - name: read std var
-      shell: pwsh
+        shell: pwsh
         run: |
           Write-host $STD_VAR
           Write-host $Global:STD_VAR
