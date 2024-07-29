@@ -1,0 +1,24 @@
+on:
+  workflow_call:
+    inputs:
+      environment_type:
+        type: string
+        required: true
+
+jobs:
+  Get_Version:
+    uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Check_if_tag_exist.yaml@main
+
+  Create_Tag:
+    needs: Get_Version
+    uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Create_tag.yaml@main
+    with:
+      version_tag: ${{ needs.Get_Version.outputs.version_tag }}
+      tag_reference_exist: ${{ needs.Get_Version.outputs.tag_reference_exist }}
+
+  Create_Release:
+    needs: [Get_Version, Create_Tag]
+    uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Create_release.yaml@main
+    with:
+      version_tag: ${{ needs.Get_Version.outputs.version_tag }}
+      pre_release: 'false'
