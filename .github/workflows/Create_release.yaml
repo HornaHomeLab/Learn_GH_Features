@@ -32,7 +32,7 @@ jobs:
             fi
 
       - name: Create Release ${{ inputs.version_tag }}
-        if: steps.release-check.outputs.exist == false
+        if: steps.release-check.outputs.exist == 'false'
         id: new-release
         run: |
           curl -L -s --fail-with-body \
@@ -51,7 +51,7 @@ jobs:
             }'
 
       - name: Update Release ${{ inputs.version_tag }}
-        if: steps.release-check.outputs.exist == true
+        if: steps.release-check.outputs.exist == 'true'
         run: |
           curl -L -s --fail-with-body \
             -X PATCH \
