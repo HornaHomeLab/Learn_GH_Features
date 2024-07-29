@@ -4,6 +4,9 @@ on:
       environment_type:
         type: string
         required: true
+      files:
+        type: string
+        default: "./workflowHelpers/get-version.sh ./README.md ./t"
 
 jobs:
   Get_Version:
@@ -30,4 +33,4 @@ jobs:
       archive_name: "tempor"
       release_id: ${{ needs.Create_Release.outputs.release_id }}
       version_tag: ${{ needs.Get_Version.outputs.version_tag }}
-      files_to_archive: "./workflowHelpers/get-version.sh ./README.md"
+      files_to_archive: ${{ inputs.files }}

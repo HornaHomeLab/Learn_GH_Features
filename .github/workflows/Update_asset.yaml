@@ -41,10 +41,20 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             --url https://api.github.com/${{ github.repository }}/releases/assets/${{ steps.asset.outputs.asset_id }}
       
-      - name: Create archive directory
+      - name: Create archive
         run: |
           archive_name="archive.tar.gz"
           tar -czf $archive_name ${{inputs.files_to_archive}}
+      - name: Upload archive
+        run: |
+          curl -L -s --fail-with-body \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "Content-Type: application/octet-stream" \
+            --url "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ inputs.release_id }}/assets?name=archive.tar.gz" \
+            --data-binary "@archive.tar.gz"
       - name: Check if archive exist
         run: |
           ls
