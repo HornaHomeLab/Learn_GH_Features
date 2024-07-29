@@ -22,3 +22,10 @@ jobs:
     with:
       version_tag: ${{ needs.Get_Version.outputs.version_tag }}
       pre_release: 'false'
+
+  Upload_Assets:
+    needs: Create_Release
+    runs-on: container
+    steps:
+      - name: print release id
+        run: echo "${{ needs.Create_Release.outputs.release_id }}"
