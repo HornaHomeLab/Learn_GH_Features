@@ -15,7 +15,7 @@ on:
 
 jobs:
   Trigger_Workflow:
-      uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Create_release.yaml@main
+      uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Process_create_release.yaml@main
       with:
         environment_type: DEV
     
