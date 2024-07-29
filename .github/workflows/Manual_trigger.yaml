@@ -12,6 +12,8 @@ on:
 
   push:
 
+permissions:
+  contents: write
 
 jobs:
   Trigger_Workflow:

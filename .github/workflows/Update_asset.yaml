@@ -15,8 +15,7 @@ on:
         required: true
         description: JSON list of file paths which should be included in archive
 
-permissions:
-  contents: write
+
 
 jobs:
   Upload_assets:
