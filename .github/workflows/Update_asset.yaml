@@ -55,4 +55,6 @@ jobs:
           cd ./temp
           tar -xzf ./archive.tar.gz 
           ls
+          echo "wh contents"
+          ls ./workflowHelpers/
 
