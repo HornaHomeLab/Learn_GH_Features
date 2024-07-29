@@ -51,8 +51,7 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             --url https://api.github.com/repos/${{ github.repository }}/git/ref/tags/${{ inputs.version_tag }} \
-            -d '{
-              "ref":"refs/tags/${{ inputs.version_tag }}",
+            -d '{ 
               "sha":"${{ github.sha }}",
               "force":true
             }'
