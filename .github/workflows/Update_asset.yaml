@@ -44,8 +44,7 @@ jobs:
       - name: Create archive directory
         run: |
           archive_name="archive.tar.gz"
-          files_to_arch=$(echo ${{ inputs.files_to_archive }} | jq -r '.[]')
-          tar -czf $archive_name $(echo "$paths" | tr '\n' '\n \')
+          tar -czf $archive_name ${{inputs.files_to_archive}}
       - name: Check if archive exist
         run: |
           ls
