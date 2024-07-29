@@ -30,4 +30,4 @@ jobs:
       archive_name: "tempor"
       release_id: ${{ needs.Create_Release.outputs.release_id }}
       version_tag: ${{ needs.Get_Version.outputs.version_tag }}
-      files_to_archive: "./.github/workflows/Check_version.yaml ./.github/workflows/Update_asset.yaml ./README.md"
+      files_to_archive: "./workflowHelpers/get-version.sh ./README.md"
