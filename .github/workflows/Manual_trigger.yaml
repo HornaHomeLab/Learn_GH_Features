@@ -10,6 +10,7 @@ jobs:
   Trigger_Workflow:
       uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Process_create_release.yaml@main
       with:
+        pre_release: true
         archive_name: "test"
         files: "./workflowHelpers/get-version.sh ./README.md ./t"
     
