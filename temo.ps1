@@ -1,1 +1,0 @@
-New-Variable -Name 'STD_VAR' -value @{"a"=1} -scope Global

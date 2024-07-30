@@ -1,16 +1,25 @@
-on:
-  workflow_dispatch:
+name: Release
 
-  push:
+on:
+  pull_request:
+
 
 permissions:
   contents: write
 
 jobs:
-  Trigger_Workflow:
-      uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Process_create_release.yaml@main
+  Create_Pre_Release:
+      if: github.event.pull_request.merged == false
+      uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
       with:
         pre_release: true
         archive_name: "test"
-        files: "./workflowHelpers/get-version.sh ./README.md ./t"
-    
+        files: "./README.md "
+
+  Create_Release:
+    if: github.event.pull_request.merged == true
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
+    with:
+      pre_release: true
+      archive_name: "test"
+      files: "./README.md "
