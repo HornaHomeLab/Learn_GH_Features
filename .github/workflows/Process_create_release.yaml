@@ -30,7 +30,7 @@ jobs:
     needs: [Get_Version, Create_Release]
     uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Update_asset.yaml@main
     with:
-      archive_name: "tempor"
+      archive_name: "test_archive"
       release_id: ${{ needs.Create_Release.outputs.release_id }}
       version_tag: ${{ needs.Get_Version.outputs.version_tag }}
       files_to_archive: ${{ inputs.files }}
