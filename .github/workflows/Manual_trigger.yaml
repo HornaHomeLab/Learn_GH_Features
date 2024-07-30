@@ -2,19 +2,14 @@ name: PR
 
 on:
   pull_request:
+    types: [ opened, synchronize, closed ]
 
 permissions:
   contents: write
 
 jobs:
-  Test:
-    runs-on: container
-    steps:
-      - name: Print ${{github.event.action}}
-        run : echo "${{github.event.action}}"
-
   Create_Pre_Release:
-      if: github.event.pull_request.merged == false && (github.event.action == 'opened' || github.event.action == 'edited')
+      if: github.event.pull_request.merged == false && (github.event.action == 'opened' || github.event.action == 'synchronize')
       uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
       with:
         pre_release: true
@@ -32,4 +27,4 @@ jobs:
       
   Remove_Release:
     if: github.event.pull_request.merged == false && github.event.action == 'closed'
-    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yaml@addRemovalWorkflows
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yaml@main
