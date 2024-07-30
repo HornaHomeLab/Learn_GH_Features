@@ -1,14 +1,5 @@
 on:
   workflow_dispatch:
-    inputs:
-      environment_type:
-        description: Select the environment
-        type: choice
-        default: "DEV"
-        required: true
-        options:
-          - DEV
-          - PROD
 
   push:
 
@@ -19,5 +10,6 @@ jobs:
   Trigger_Workflow:
       uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Process_create_release.yaml@main
       with:
-        environment_type: DEV
+        archive_name: "test"
+        files: "./workflowHelpers/get-version.sh ./README.md ./t"
     
