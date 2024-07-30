@@ -1,3 +1,5 @@
+name: Update asset
+
 on:
   workflow_call:
     inputs:
