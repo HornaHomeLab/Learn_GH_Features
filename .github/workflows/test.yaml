@@ -1,0 +1,17 @@
+name: Validate version
+
+on:
+  workflow_dispatch:
+
+
+permissions:
+  contents: write
+
+jobs:
+  Create_Pre_Release:
+      uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
+      with:
+        pre_release: true
+        archive_name: "test"
+        files: "./README.md "
+
