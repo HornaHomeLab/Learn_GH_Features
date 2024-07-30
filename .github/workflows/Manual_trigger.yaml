@@ -7,6 +7,12 @@ permissions:
   contents: write
 
 jobs:
+  Test:
+    runs-on: container
+    steps:
+      - name: Print ${{github.event.action}}
+        run : echo "${{github.event.action}}"
+
   Create_Pre_Release:
       if: github.event.pull_request.merged == false && (github.event.action == 'opened' || github.event.action == 'edited')
       uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
