@@ -2,7 +2,7 @@ name: Release
 
 on:
   pull_request:
-
+    types: [ opened, closed ]
 
 permissions:
   contents: write
