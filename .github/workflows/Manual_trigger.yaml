@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   Create_Pre_Release:
-      if: github.event.pull_request.merged == false
+      if: github.event.pull_request.merged == false && github.event.action == 'opened'
       uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
       with:
         pre_release: true
@@ -17,9 +17,17 @@ jobs:
         files: "./README.md "
 
   Create_Release:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true && github.event.action == 'closed'
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
     with:
       pre_release: false
       archive_name: "test"
       files: "./README.md "
+
+  Remove_Release:
+    if: github.event.pull_request.merged == false && github.event.action == 'closed'
+    runs-on: container
+    steps:
+      - name: print status
+        run: | 
+          echo "Removing Release"
