@@ -26,8 +26,4 @@ jobs:
 
   Remove_Release:
     if: github.event.pull_request.merged == false && github.event.action == 'closed'
-    runs-on: container
-    steps:
-      - name: print status
-        run: | 
-          echo "Removing Release"
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yaml@addRemovalWorkflows
