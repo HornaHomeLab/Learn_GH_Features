@@ -24,6 +24,7 @@ jobs:
       archive_name: "test"
       files: "./README.md "
 
+      
   Remove_Release:
     if: github.event.pull_request.merged == false && github.event.action == 'closed'
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yaml@addRemovalWorkflows
