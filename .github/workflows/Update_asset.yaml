@@ -30,7 +30,7 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
-              --url https://api.github.com/repos/${{ github.repository }}/releases/${{ inputs.release_id }}/assets \
+              --url https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ inputs.version_tag }} \
             |  jq '.[].id')" >> $GITHUB_OUTPUT
       
       - name: Delete existing asset
