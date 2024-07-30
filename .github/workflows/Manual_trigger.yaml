@@ -1,4 +1,4 @@
-name: Release
+name: PR
 
 on:
   pull_request:
@@ -20,6 +20,6 @@ jobs:
     if: github.event.pull_request.merged == true
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
     with:
-      pre_release: true
+      pre_release: false
       archive_name: "test"
       files: "./README.md "
