@@ -17,7 +17,7 @@ jobs:
         files: "./README.md "
 
   Create_Release:
-    if: github.event.pull_request.merged == false
+    if: github.event.pull_request.merged == true
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
     with:
       pre_release: true
