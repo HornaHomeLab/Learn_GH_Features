@@ -2,14 +2,14 @@ name: PR
 
 on:
   pull_request:
-    types: [ opened, closed ]
+    types: [ opened, edited, closed ]
 
 permissions:
   contents: write
 
 jobs:
   Create_Pre_Release:
-      if: github.event.pull_request.merged == false && github.event.action == 'opened'
+      if: github.event.pull_request.merged == false && (github.event.action == 'opened' || github.event.action == 'edited')
       uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
       with:
         pre_release: true
