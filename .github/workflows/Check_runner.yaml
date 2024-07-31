@@ -13,16 +13,8 @@ on:
 
 
 jobs:
-  Up:
-    uses: HornaHomeLab/depl_dev/.github/workflows/Check_runner.yaml@main
-    with:
-      environment: "development"
-    secrets:
-      inherit
-
   Deployment:
-    needs: Up
-    uses: HornaHomeLab/depl_dev/.github/workflows/Deploy_version.yaml@main
+    uses: HornaHomeLab/depl_dev/.github/workflows/Deploy_docker_compose.yaml@main
     with:
       environment: "development"
     secrets:
