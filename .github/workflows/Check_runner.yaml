@@ -9,14 +9,14 @@ on:
           - development
           - production
 
-permissions: write-all
+  push:
 
 
 jobs:
   Up:
     uses: HornaHomeLab/depl_dev/.github/workflows/Check_runner.yaml@main
     with:
-      environment: ${{ inputs.environment }}
+      environment: "development"
     secrets:
       inherit
 
@@ -24,6 +24,6 @@ jobs:
     needs: Up
     uses: HornaHomeLab/depl_dev/.github/workflows/Deploy_version.yaml@main
     with:
-      environment: ${{ inputs.environment }}
+      environment: "development"
     secrets:
       inherit
