@@ -1,0 +1,14 @@
+on:
+  workflow_dispatch:
+
+
+jobs:
+  test:
+    runs-on: container
+    env:
+      TEST_VAR: "Ala ma kota"
+    steps:
+      - name: test
+        run: |
+
+          echo $TEST_VAR
