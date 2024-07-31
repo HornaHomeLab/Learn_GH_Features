@@ -21,6 +21,7 @@ jobs:
       inherit
 
   Deployment:
+    needs: Up
     uses: HornaHomeLab/depl_dev/.github/workflows/Deploy_version.yaml@main
     with:
       environment: ${{ inputs.environment }}
