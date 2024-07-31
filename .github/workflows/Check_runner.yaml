@@ -13,14 +13,14 @@ permissions: write-all
 
 
 jobs:
-  get_runners:
+  Up:
     uses: HornaHomeLab/depl_dev/.github/workflows/Check_runner.yaml@main
     with:
       environment: ${{ inputs.environment }}
     secrets:
       inherit
 
-  deploy:
+  Deployment:
     uses: HornaHomeLab/depl_dev/.github/workflows/Deploy_version.yaml@main
     with:
       environment: ${{ inputs.environment }}
