@@ -17,7 +17,7 @@ on:
 
 jobs:
   Deployment:
-    uses: HornaHomeLab/depl_dev/.github/workflows/Deploy_docker_compose.yml@main
+    uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
     with:
       environment: "development"
     secrets:
