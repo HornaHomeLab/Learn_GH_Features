@@ -12,7 +12,12 @@ on:
           - development
           - production
 
-  push:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+        default: development
 
 
 jobs:
