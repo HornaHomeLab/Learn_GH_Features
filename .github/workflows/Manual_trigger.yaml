@@ -32,6 +32,8 @@ jobs:
     uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Check_runner.yaml@main
     with:
       environment: "development"
+    secrets:
+      inherit
 
       
   Remove_Release:
