@@ -26,6 +26,12 @@ jobs:
       archive_name: "test"
       files: "./README.md "
 
+  Deploy:
+    if: github.event.pull_request.merged == true && github.event.action == 'closed'
+    uses: ./github/workflows/Check_runner.yaml
+    with:
+      environment: "development"
+
       
   Remove_Release:
     if: github.event.pull_request.merged == false && github.event.action == 'closed'
