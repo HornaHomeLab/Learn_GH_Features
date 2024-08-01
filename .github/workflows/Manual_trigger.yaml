@@ -29,7 +29,7 @@ jobs:
   Deploy:
     needs: Create_Release
     if: github.event.pull_request.merged == true && github.event.action == 'closed'
-    uses: ./github/workflows/Check_runner.yaml
+    uses: HornaHomeLab/Learn_GH_Features/./github/workflows/Check_runner.yaml@main
     with:
       environment: "development"
 
