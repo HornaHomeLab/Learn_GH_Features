@@ -1,4 +1,4 @@
-name: PR
+name: Release
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  Create_Pre_Release:
+  Pre:
       if: github.event.pull_request.merged == false && (github.event.action == 'opened' || github.event.action == 'synchronize')
       uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
       with:
@@ -18,7 +18,7 @@ jobs:
         archive_name: "test"
         files: "./README.md "
 
-  Create_Release:
+  Full:
     if: github.event.pull_request.merged == true && github.event.action == 'closed'
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
     with:
@@ -27,7 +27,7 @@ jobs:
       files: "./README.md "
 
   Deploy:
-    needs: Create_Release
+    needs: Full
     uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
     with:
       environment: "development"
@@ -35,6 +35,6 @@ jobs:
       inherit
 
       
-  Remove_Release:
+  Remove:
     if: github.event.pull_request.merged == false && github.event.action == 'closed'
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yaml@main
