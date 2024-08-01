@@ -28,8 +28,7 @@ jobs:
 
   Deploy:
     needs: Create_Release
-    if: github.event.pull_request.merged == true && github.event.action == 'closed'
-    uses: HornaHomeLab/Learn_GH_Features/.github/workflows/Check_runner.yaml@main
+    uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
     with:
       environment: "development"
     secrets:
