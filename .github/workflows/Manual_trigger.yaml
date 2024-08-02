@@ -38,6 +38,7 @@ jobs:
     uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
     with:
       environment: "development"
+      version: ${{ needs.Full.outputs.released_version }}
     secrets: inherit
 
   Remove:
