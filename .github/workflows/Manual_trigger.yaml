@@ -20,7 +20,6 @@ jobs:
     with:
       pre_release: true
       archive_name: "test"
-      files: "./README.md"
 
 
 
@@ -30,7 +29,6 @@ jobs:
     with:
       pre_release: false
       archive_name: "test"
-      files: "./README.md"
 
 
   Deploy:
