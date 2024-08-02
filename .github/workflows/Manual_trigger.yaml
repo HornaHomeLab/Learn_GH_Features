@@ -12,7 +12,7 @@ permissions:
 jobs:
   Pre:
     if: github.event.pull_request.merged == false && (github.event.action == 'opened' || github.event.action == 'synchronize')
-    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@main
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@development
     with:
       pre_release: true
       archive_name: "test"
@@ -20,7 +20,7 @@ jobs:
 
   Full:
     if: github.event.pull_request.merged == true && github.event.action == 'closed'
-    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@main
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@development
     with:
       pre_release: false
       archive_name: "test"
