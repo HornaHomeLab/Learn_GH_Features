@@ -20,6 +20,7 @@ jobs:
     with:
       pre_release: true
       archive_name: "test"
+      files: "./README.md"
 
 
 
@@ -29,6 +30,7 @@ jobs:
     with:
       pre_release: false
       archive_name: "test"
+      files: "./README.md"
 
 
   Deploy:
@@ -38,7 +40,7 @@ jobs:
       environment: "development"
     secrets: inherit
 
-  # Remove:
-  #   if: github.event.pull_request.merged == false && github.event.action == 'closed'
-  #   uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yaml@main
+  Remove:
+    if: github.event.pull_request.merged == false && github.event.action == 'closed'
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yml@development
 
