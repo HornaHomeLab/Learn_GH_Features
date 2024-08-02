@@ -17,7 +17,6 @@ jobs:
       pre_release: true
       archive_name: "test"
 
-
   Full:
     if: github.event.pull_request.merged == true && github.event.action == 'closed'
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@development
@@ -25,13 +24,12 @@ jobs:
       pre_release: false
       archive_name: "test"
 
-
   Deploy:
     needs: Full
     uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
     with:
       environment: "development"
-    secrets: inherit 
+    secrets: inherit
 
   # Remove:
   #   if: github.event.pull_request.merged == false && github.event.action == 'closed'
