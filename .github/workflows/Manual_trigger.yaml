@@ -31,8 +31,7 @@ jobs:
     uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
     with:
       environment: "development"
-    secrets: inherit
-
+    secrets: inherit 
 
   # Remove:
   #   if: github.event.pull_request.merged == false && github.event.action == 'closed'
