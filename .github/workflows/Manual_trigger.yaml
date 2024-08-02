@@ -24,6 +24,7 @@ jobs:
       pre_release: false
       archive_name: "test"
 
+      
   Deploy:
     needs: Full
     uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
