@@ -15,6 +15,7 @@ jobs:
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@main
     with:
       pre_release: true
+      archive_name: "test"
 
 
   Full:
@@ -22,6 +23,8 @@ jobs:
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@main
     with:
       pre_release: false
+      archive_name: "test"
+
 
   Deploy:
     needs: Full
