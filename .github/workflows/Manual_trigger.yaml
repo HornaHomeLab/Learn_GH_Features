@@ -5,26 +5,28 @@ on:
     types: [opened, synchronize, closed]
 
   workflow_dispatch:
+    inputs:
+      test:
+        type: string
+        default: 'true'
 
 permissions:
   contents: write
 
 jobs:
   Pre:
-    if: github.event.pull_request.merged == false && (github.event.action == 'opened' || github.event.action == 'synchronize')
-    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
+    if: (github.event.pull_request.merged == false && (github.event.action == 'opened' || github.event.action == 'synchronize')) || inputs.test == 'true'
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@development
     with:
       pre_release: true
       archive_name: "test"
-      files: "./README.md "
 
   Full:
     if: github.event.pull_request.merged == true && github.event.action == 'closed'
-    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yaml@main
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@development
     with:
       pre_release: false
       archive_name: "test"
-      files: "./README.md "
 
   Deploy:
     needs: Full
@@ -33,6 +35,7 @@ jobs:
       environment: "development"
     secrets: inherit
 
-  Remove:
-    if: github.event.pull_request.merged == false && github.event.action == 'closed'
-    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yaml@main
+  # Remove:
+  #   if: github.event.pull_request.merged == false && github.event.action == 'closed'
+  #   uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yaml@main
+
