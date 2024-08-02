@@ -29,6 +29,7 @@ jobs:
     with:
       pre_release: false
       archive_name: "test"
+      latest: true
 
 
   Deploy:
