@@ -1,3 +1,6 @@
+name: Deployment
+run-name: Deployment ${{ inputs.version }} to ${{ inputs.environment }}
+
 on: 
   workflow_dispatch:
     inputs:
